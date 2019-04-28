@@ -293,9 +293,9 @@ class DetectorBase(object):
 
     def check_clientserver_support(self, script_type):
         version = self.get_vim_version(script_type)
-        if '+clientserver' in version:
+        if b'+clientserver' in version:
             return True
-        elif '-clientserver' in version:
+        elif b'-clientserver' in version:
             raise ValueError(NO_SERVER_SUPPORT % self.scripts[script_type])
         else:
             raise ValueError(NO_CLIENTSERVER_IN_VERSION % version)
@@ -373,9 +373,10 @@ else:
 
         def check_python_support(self):
             version = self.get_vim_version(SERVER)
-            if '+python' in version:
+
+            if b'+python' in version:
                 return True
-            elif '-python' in version:
+            elif b'-python' in version:
                 raise ValueError(NO_PYTHON_SUPPORT % self.scripts[SERVER])
             else:
                 raise ValueError(NO_PYTHON_IN_VERSION % version)
